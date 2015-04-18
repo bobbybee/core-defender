@@ -4,9 +4,10 @@ var MathImul = stdlib.Math.imul;
 var HEAP32 = new stdlib.Int32Array(buffer);
 var HEAPD64 = new stdlib.Float64Array(buffer);
 var numSprites = 0;
+var userspace = 0;
 var core = 0;
-var missle1 = 0;
-var missle1Active = 0;
+var missles = 0;
+var misslesActive = 0;
 var timeout = 0;
 function newSprite(x,y,w,h,topLeftX,topLeftY,bottomRightX,bottomRightY){
 x = +x;
@@ -30,26 +31,42 @@ HEAPD64[((ret|0)+ (56|0))>>3]=+bottomRightY
 HEAP32[(numSprites)>>2]=((((HEAP32[(numSprites)>>2]|0))+((1|0)))|0)
 return (ret)|0;
 }
-function shootMissleSprite(missle){
+function shootMissleSprite(missle,n){
 missle = missle|0;
-HEAPD64[((missle|0)+ (0|0))>>3]=+-2
-HEAPD64[((missle|0)+ (8|0))>>3]=+-2
+n = n|0;
+var active = 0;
+missle=((newSprite(+-2,+-2,+0.4,+0.4,+0.5,+0,+1,+0.5)|0)|0)
+active=((((misslesActive)+(((MathImul(n,4)|0)|0)))|0)|0)
+HEAP32[(active)>>2]=(1|0)
 }
 function shootMissle(){
-if(((missle1Active|0))==((0|0))){
-missle1Active=(1|0)
-shootMissleSprite((missle1|0));
+var i = 0;
+var active = 0;
+for(i=(0|0);(((i|0))<((1|0)));i=((((i|0))+((1|0)))|0)){
+active=((((misslesActive)+(((MathImul(i,4)|0)|0)))|0)|0)
+if(((HEAP32[(active)>>2]|0))==((0|0))){
+shootMissleSprite(((((missles|0))+(((MathImul(i,72)|0)|0)))|0),i);
+}
 }
 }
 function init(){
+userspace=(131072|0)
+missles=(80|0)
+misslesActive=((((userspace)+(((MathImul(72,32)|0)|0)))|0)|0)
 timeout=(100|0)
 core=((newSprite(+0.5,+0.5,+1,+1,+0,+0,+0.5,+0.5)|0)|0)
-missle1=((newSprite(+-10,+-10,+0.4,+0.4,+0.5,+0,+1,+0.5)|0)|0)
 }
 function loop(){
-if(((missle1Active|0))==((1|0))){
-HEAPD64[((missle1|0)+ (0|0))>>3]=+((+HEAPD64[((missle1|0)+ (0|0))>>3])+(+0.1))
-HEAPD64[((missle1|0)+ (8|0))>>3]=+((+HEAPD64[((missle1|0)+ (8|0))>>3])+(+0.1))
+var i = 0;
+var active = 0;
+var missle = 0;
+for(i=(0|0);(((i|0))<((1|0)));i=((((i|0))+((1|0)))|0)){
+active=((((misslesActive)+(((MathImul(i,4)|0)|0)))|0)|0)
+if(((HEAP32[(active)>>2]|0))==((1|0))){
+missle=(((((missles|0))+(((MathImul(i,72)|0)|0)))|0)|0)
+HEAPD64[((missle|0)+ (0|0))>>3]=+((+HEAPD64[((missle|0)+ (0|0))>>3])+(+0.1))
+HEAPD64[((missle|0)+ (8|0))>>3]=+((+HEAPD64[((missle|0)+ (8|0))>>3])+(+0.1))
+}
 }
 timeout=((((timeout|0))-((1|0)))|0)
 if(((timeout|0))==((0|0))){

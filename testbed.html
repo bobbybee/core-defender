@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="fountain.js" type="text/javascript"></script>
+  <script src="testsoda.js" type="text/javascript"></script>
+
+  <script>
+
+  var drink, ctx, program;
+
+  window.onload = function() {
+    program = fountain({
+      container: document.body
+    });
+
+    program.init(Soda);
+
+    program.initWebGL(1024, 768, {
+      "vert": {
+        type: "vertex",
+        source:
+        [
+        "attribute vec3 aVertexPosition;",
+        "attribute vec3 aSpritePosition;",
+        "attribute vec2 aTextureCoord;",
+        "uniform mat4 uMVMatrix;",
+        "uniform mat4 uPMatrix;",
+        "attribute float angle;",
+        "varying highp vec2 vTextureCoord;",
+        "",
+        "void main(void) {",
+        "  if(angle == float(0)) {",
+            "gl_Position = vec4(aVertexPosition, 1.0) + vec4(aSpritePosition, 1.0);",
+        "} else {",
+        "  mat4 RotationMatrix = mat4(cos(angle), -sin(angle), 0.0, 0.0,",
+        "                             sin(angle), cos(angle), 0.0, 0.0,",
+        "                             0.0, 0.0, 1.0, 0.0,",
+        "                             0.0, 0.0, 0.0, 1.0);",
+        "  gl_Position = (RotationMatrix * vec4(aVertexPosition, 1.0)) + vec4(aSpritePosition, 1.0);",
+        "}",
+        "  vTextureCoord = aTextureCoord;",
+        "}",
+        ]
+      },
+      "frag": {
+        type: "fragment",
+        source:
+        [
+        "varying highp vec2 vTextureCoord;",
+        "uniform sampler2D uSampler;",
+        "precision mediump float;",
+        "void main(void) {",
+        "  vec4 color = texture2D(uSampler, vTextureCoord);",
+        "  gl_FragColor = color.rgba;",
+        "  if(color.a == 0.0) {",
+            "discard;",
+          "}",
+        "}"
+        ]
+      }
+    });
+
+    program.initTouchEvents(program.surface);
+
+    requestAnimationFrame(program.glLoop);
+  }
+
+  function loop() {
+  }
+
+  </script>
+</head>
+<body>
+  Carbon Demo <br/>
+</body>
+</html>

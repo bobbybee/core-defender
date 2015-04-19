@@ -35,41 +35,39 @@ function shootMissleSprite(missle,n){
 missle = missle|0;
 n = n|0;
 var active = 0;
-missle=((newSprite(+-2,+-2,+0.4,+0.4,+0.5,+0,+1,+0.5)|0)|0)
 active=((((misslesActive)+(((MathImul(n,4)|0)|0)))|0)|0)
+missle=((newSprite(+-2,+-2,+0.4,+0.4,+0.5,+0,+1,+0.5)|0)|0)
 HEAP32[(active)>>2]=(1|0)
 }
 function shootMissle(){
 var i = 0;
-var active = 0;
-for(i=(0|0);(((i|0))<((1|0)));i=((((i|0))+((1|0)))|0)){
-active=((((misslesActive)+(((MathImul(i,4)|0)|0)))|0)|0)
-if(((HEAP32[(active)>>2]|0))==((0|0))){
+for(i=(0|0);(((i|0))<((16|0)));i=((((i|0))+((1|0)))|0)){
+if(((HEAP32[((((misslesActive)+(((MathImul(i,4)|0)|0)))|0))>>2]|0))==((0|0))){
 shootMissleSprite(((((missles|0))+(((MathImul(i,72)|0)|0)))|0),i);
+break;
 }
 }
 }
 function init(){
 userspace=(131072|0)
 missles=(80|0)
-misslesActive=((((userspace)+(((MathImul(72,32)|0)|0)))|0)|0)
-timeout=(100|0)
+misslesActive=(userspace|0)
+timeout=(10|0)
 core=((newSprite(+0.5,+0.5,+1,+1,+0,+0,+0.5,+0.5)|0)|0)
 }
 function loop(){
 var i = 0;
-var active = 0;
 var missle = 0;
-for(i=(0|0);(((i|0))<((1|0)));i=((((i|0))+((1|0)))|0)){
+for(i=(0|0);(((i|0))<((16|0)));i=((((i|0))+((1|0)))|0)){
 if(((HEAP32[((((misslesActive)+(((MathImul(i,4)|0)|0)))|0))>>2]|0))==((1|0))){
 missle=(((((missles|0))+(((MathImul(i,72)|0)|0)))|0)|0)
-HEAPD64[((missle|0)+ (0|0))>>3]=+((+HEAPD64[((missle|0)+ (0|0))>>3])+(+0.1))
-HEAPD64[((missle|0)+ (8|0))>>3]=+((+HEAPD64[((missle|0)+ (8|0))>>3])+(+0.1))
+HEAPD64[((missle|0)+ (0|0))>>3]=+((+HEAPD64[((missle|0)+ (0|0))>>3])+(+0.01))
+HEAPD64[((missle|0)+ (8|0))>>3]=+((+HEAPD64[((missle|0)+ (8|0))>>3])+(+0.01))
 }
 }
 timeout=((((timeout|0))-((1|0)))|0)
 if(((timeout|0))==((0|0))){
-timeout=(100|0)
+timeout=(50|0)
 shootMissle();
 }
 }

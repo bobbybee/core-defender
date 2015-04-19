@@ -63,6 +63,7 @@ var fountain = function(ctx) {
     var canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
+    canvas.style.height = "100%";
     ctx.container.appendChild(canvas);
     ctx.surface = canvas;
 

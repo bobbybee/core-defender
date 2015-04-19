@@ -203,8 +203,8 @@ var fountain = function(ctx) {
     for(var i = 0; i < spriteCount; ++i) {
       var sindex = 1 + (i * 9); // starting index for sprite
       var angle = ctx.float64View[sindex+8],
-          width = ctx.float64View[sindex+3],
-          height = ctx.float64View[sindex+4];
+          width = ctx.float64View[sindex+2],
+          height = ctx.float64View[sindex+3];
 
       var ind = 18 * i;
 
@@ -285,7 +285,7 @@ var fountain = function(ctx) {
       console.log("Image loaded");
       ctx.gl.bindTexture(ctx.gl.TEXTURE_2D, texture);
       ctx.gl.texImage2D(ctx.gl.TEXTURE_2D, 0, ctx.gl.RGBA, ctx.gl.RGBA, ctx.gl.UNSIGNED_BYTE, image);
-      ctx.gl.texParameteri(ctx.gl.TEXTURE_2D, ctx.gl.TEXTURE_MAG_FILTER, ctx.gl.LINEAR);
+      ctx.gl.texParameteri(ctx.gl.TEXTURE_2D, ctx.gl.TEXTURE_MAG_FILTER, ctx.gl.NEAREST);
       ctx.gl.texParameteri(ctx.gl.TEXTURE_2D, ctx.gl.TEXTURE_MIN_FILTER, ctx.gl.LINEAR_MIPMAP_NEAREST);
       ctx.gl.generateMipmap(ctx.gl.TEXTURE_2D);
       ctx.gl.bindTexture(ctx.gl.TEXTURE_2D, null);

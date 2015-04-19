@@ -62,13 +62,13 @@ touchY=(65552|0)
 missles=(80|0)
 misslesActive=(userspace|0)
 timeout=(10|0)
-core=((newSprite(+(0),+(0),+(1),+(1),+(0),+(0),+(0.5),+(0.5))|0)|0)
+core=((newSprite(+(0),+(0),+(2),+(2),+(0),+(0),+(0.5),+(0.5))|0)|0)
 }
 function loop(){
 var i = 0;
 var missle = 0;
 var angle = 0.0;
-HEAPD64[((core|0)+ (64|0))>>3]=+(+(((+(3.14159))-(+((+atan2(HEAPD64[(touchY)>>3],HEAPD64[(touchX)>>3])))))))
+HEAPD64[((core|0)+ (64|0))>>3]=+((+atan2(+(((+(0))-(+(HEAPD64[(touchY)>>3])))),+(((+(0))-(+(HEAPD64[(touchX)>>3])))))))
 for(i=(0|0);(((i|0))<((16|0)));i=((((i|0))+((1|0)))|0)){
 if(((HEAP32[((((misslesActive)+(((MathImul(i,4)|0)|0)))|0))>>2]|0))==((1|0))){
 missle=(((((missles|0))+(((MathImul(i,72)|0)|0)))|0)|0)

@@ -29,7 +29,7 @@ void shootMissle() {
 
 void init() {
   // make sprites ahead of time
-  core = newSprite(0, 0, 1, 1, 0, 0, 0.5, 0.5);
+  core = newSprite(0, 0, 2, 2, 0, 0, 0.5, 0.5);
 }
 
 void loop() {
@@ -37,7 +37,7 @@ void loop() {
   structptr(Sprite) missle;
   double angle;
 
-  core->a = 3.14159 - atan2(*touchY, *touchX);
+  core->a = atan2(0-*touchY, 0-*touchX);
 
   for(i = 0; i < 16; i += 1) {
     if(*(get(misslesActive, i)) == 1) {

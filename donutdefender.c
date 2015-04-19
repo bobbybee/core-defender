@@ -33,10 +33,10 @@ void init() {
 }
 
 void loop() {
-  core->a = 3.14159 - atan2(*touchY, *touchX);
-
   int i = 0;
   structptr(Sprite) missle;
+
+  core->a = 3.14159 - atan2(*touchY, *touchX);
 
   for(i = 0; i < 16; i += 1) {
     if(*(get(misslesActive, i)) == 1) {

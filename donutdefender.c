@@ -35,14 +35,16 @@ void init() {
 void loop() {
   int i = 0;
   structptr(Sprite) missle;
+  double angle;
 
   core->a = 3.14159 - atan2(*touchY, *touchX);
 
   for(i = 0; i < 16; i += 1) {
     if(*(get(misslesActive, i)) == 1) {
       missle = get(missles, i);
-      missle->x += 0.01;
-      missle->y += 0.01;
+      angle = atan2(missle->x, missle->y);
+      missle->x -= cos(angle) * 0.05;
+      missle->y -= sin(angle) * 0.05;
     }
   }
 

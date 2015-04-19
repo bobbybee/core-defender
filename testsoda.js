@@ -2,6 +2,8 @@ function Soda(stdlib, foreign, buffer) {
 "use asm";
 var MathImul = stdlib.Math.imul;
 var atan2 = stdlib.Math.atan2;
+var sin = stdlib.Math.sin;
+var cos = stdlib.Math.cos;
 var HEAP32 = new stdlib.Int32Array(buffer);
 var HEAPD64 = new stdlib.Float64Array(buffer);
 var numSprites = 0;
@@ -65,12 +67,14 @@ core=((newSprite(+(0),+(0),+(1),+(1),+(0),+(0),+(0.5),+(0.5))|0)|0)
 function loop(){
 var i = 0;
 var missle = 0;
+var angle = 0.0;
 HEAPD64[((core|0)+ (64|0))>>3]=+(+(((+(3.14159))-(+((+atan2(HEAPD64[(touchY)>>3],HEAPD64[(touchX)>>3])))))))
 for(i=(0|0);(((i|0))<((16|0)));i=((((i|0))+((1|0)))|0)){
 if(((HEAP32[((((misslesActive)+(((MathImul(i,4)|0)|0)))|0))>>2]|0))==((1|0))){
 missle=(((((missles|0))+(((MathImul(i,72)|0)|0)))|0)|0)
-HEAPD64[((missle|0)+ (0|0))>>3]=+(((+(HEAPD64[((missle|0)+ (0|0))>>3]))+(+(0.01))))
-HEAPD64[((missle|0)+ (8|0))>>3]=+(((+(HEAPD64[((missle|0)+ (8|0))>>3]))+(+(0.01))))
+angle=+((+atan2(HEAPD64[((missle|0)+ (0|0))>>3],HEAPD64[((missle|0)+ (8|0))>>3])))
+HEAPD64[((missle|0)+ (0|0))>>3]=+(((+(HEAPD64[((missle|0)+ (0|0))>>3]))-(+(+(((+((+cos(angle))))*(+(0.05))))))))
+HEAPD64[((missle|0)+ (8|0))>>3]=+(((+(HEAPD64[((missle|0)+ (8|0))>>3]))-(+(+(((+((+sin(angle))))*(+(0.05))))))))
 }
 }
 timeout=((((timeout|0))-((1|0)))|0)

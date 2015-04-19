@@ -111,8 +111,8 @@ var fountain = function(ctx) {
     ctx.gl.spritePositionAttribute = ctx.gl.getAttribLocation(ctx.gl.whiteShader, "aSpritePosition");
     ctx.gl.enableVertexAttribArray(ctx.gl.spritePositionAttribute);
 
-    ctx.gl.angleAttr = ctx.gl.getAttribLocation(ctx.gl.whiteShader, "angle");
-    ctx.gl.enableVertexAttribArray(ctx.gl.angleAttr);
+    ctx.gl.spriteMetaAttr = ctx.gl.getAttribLocation(ctx.gl.whiteShader, "aSpriteMeta");
+    ctx.gl.enableVertexAttribArray(ctx.gl.spriteMetaAttr);
 
     ctx.sheet1 = ctx.makeTexture("spritesheet.png");
   }
@@ -196,22 +196,37 @@ var fountain = function(ctx) {
     var vertData = ctx.gl.createBuffer();
     ctx.gl.bindBuffer(ctx.gl.ARRAY_BUFFER, vertData);
 
-    var angleBuffer = new Float32Array(6 * spriteCount);
+    var metaBuffer = new Float32Array(18 * spriteCount);
     for(var i = 0; i < spriteCount; ++i) {
       var sindex = 1 + (i * 9); // starting index for sprite
-      var angle = ctx.float64View[sindex+8];
-      var ind = 6 * i;
+      var angle = ctx.float64View[sindex+8],
+          width = ctx.float64View[sindex+3],
+          height = ctx.float64View[sindex+4];
 
-      angleBuffer[ind] = angle;
-      angleBuffer[ind+1] = angle;
-      angleBuffer[ind+2] = angle;
-      angleBuffer[ind+3] = angle;
-      angleBuffer[ind+4] = angle;
-      angleBuffer[ind+5] = angle;
+      var ind = 18 * i;
+
+      metaBuffer[ind] = angle;
+      metaBuffer[ind+1] = width;
+      metaBuffer[ind+2] = height;
+      metaBuffer[ind+3] = angle;
+      metaBuffer[ind+4] = width;
+      metaBuffer[ind+5] = height;
+      metaBuffer[ind+6] = angle;
+      metaBuffer[ind+7] = width;
+      metaBuffer[ind+8] = height;
+      metaBuffer[ind+9] = angle;
+      metaBuffer[ind+10] = width;
+      metaBuffer[ind+11] = height;
+      metaBuffer[ind+12] = angle;
+      metaBuffer[ind+13] = width;
+      metaBuffer[ind+14] = height;
+      metaBuffer[ind+15] = angle;
+      metaBuffer[ind+16] = width;
+      metaBuffer[ind+17] = height;
     }
 
-    ctx.gl.bufferData(ctx.gl.ARRAY_BUFFER, angleBuffer, ctx.gl.STATIC_DRAW);
-    ctx.gl.vertexAttribPointer(ctx.gl.angleAttr, 1, ctx.gl.FLOAT, false, 0, 0);
+    ctx.gl.bufferData(ctx.gl.ARRAY_BUFFER, metaBuffer, ctx.gl.STATIC_DRAW);
+    ctx.gl.vertexAttribPointer(ctx.gl.spriteMetaAttr, 3, ctx.gl.FLOAT, false, 0, 0);
 
     ctx.gl.bindBuffer(ctx.gl.ARRAY_BUFFER, ctx.squareTexMap);
     var arr = new Float32Array(12 * spriteCount);

@@ -60,7 +60,7 @@ touchY=(65552|0)
 missles=(80|0)
 misslesActive=(userspace|0)
 timeout=(10|0)
-core=((newSprite(+(1),+(1),+(1),+(1),+(0),+(0),+(0.5),+(0.5))|0)|0)
+core=((newSprite(+(0),+(0),+(1),+(1),+(0),+(0),+(0.5),+(0.5))|0)|0)
 }
 function loop(){
 var i = 0;

@@ -61,8 +61,7 @@ var i = 0;
 var active = 0;
 var missle = 0;
 for(i=(0|0);(((i|0))<((1|0)));i=((((i|0))+((1|0)))|0)){
-active=((((misslesActive)+(((MathImul(i,4)|0)|0)))|0)|0)
-if(((HEAP32[(active)>>2]|0))==((1|0))){
+if(((HEAP32[((((misslesActive)+(((MathImul(i,4)|0)|0)))|0))>>2]|0))==((1|0))){
 missle=(((((missles|0))+(((MathImul(i,72)|0)|0)))|0)|0)
 HEAPD64[((missle|0)+ (0|0))>>3]=+((+HEAPD64[((missle|0)+ (0|0))>>3])+(+0.1))
 HEAPD64[((missle|0)+ (8|0))>>3]=+((+HEAPD64[((missle|0)+ (8|0))>>3])+(+0.1))

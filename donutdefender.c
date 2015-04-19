@@ -39,8 +39,7 @@ void loop() {
   structptr(Sprite) missle;
 
   for(i = 0; i < 1; i += 1) {
-    active = get(misslesActive, i);
-    if(*active == 1) {
+    if(*(get(misslesActive, i)) == 1) {
       missle = get(missles, i);
       missle->x += 0.1;
       missle->y += 0.1;

@@ -1,4 +1,7 @@
 int* userspace = 131072;
+double* isTouching = 65536;
+double* touchX = 65544;
+double* touchY = 65552;
 
 structptr(Sprite) core;
 structptr(Sprite) missles = 80;
@@ -30,6 +33,8 @@ void init() {
 }
 
 void loop() {
+  core->a = 3.14159 - atan2(*touchY, *touchX);
+
   int i = 0;
   structptr(Sprite) missle;
 

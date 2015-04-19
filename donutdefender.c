@@ -29,7 +29,7 @@ void shootMissle() {
 
 void init() {
   // make sprites ahead of time
-  core = newSprite(0.5, 0.5, 1, 1, 0, 0, 0.5, 0.5);
+  core = newSprite(1, 1, 1, 1, 0, 0, 0.5, 0.5);
 }
 
 void loop() {

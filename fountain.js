@@ -46,10 +46,8 @@ var fountain = function(ctx) {
     });
 
     surface.addEventListener("mousemove", function(e) {
-      if(ctx.touching) {
-        ctx.touchX = ctx.page2canvasX(e.pageX);
-        ctx.touchY = ctx.page2canvasY(e.pageY);
-      }
+      ctx.touchX = ctx.page2canvasX(e.pageX);
+      ctx.touchY = ctx.page2canvasY(e.pageY);
     });
 
   }
